@@ -21,7 +21,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 
-const WatchListEdit = ({entry, remove}) => {
+const WatchListEdit = ({entry, remove, flag}) => {
     const router = useHistory()
     const [token] = useContext(UserContext);
     const [info, setInfo] = useState(
@@ -55,6 +55,7 @@ const WatchListEdit = ({entry, remove}) => {
 
     const handleSave = () => {
         updateWatchList(entry)
+        flag()
     }
 
     const handleChangeStatus = (new_status) => {

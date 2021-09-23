@@ -13,7 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import { Button } from '@material-ui/core';
 
 
-const WatchList = ({entries, remove}) => {
+const WatchList = ({entries, remove, flag}) => {
     
     return (
     <TableContainer component={Paper}>
@@ -38,7 +38,7 @@ const WatchList = ({entries, remove}) => {
               <TableCell align="right">{entry.WatchListInDB.rating}</TableCell>
               <TableCell align="right">
                   
-                    <WatchListEdit entry={entry} remove={remove}/>
+                    <WatchListEdit entry={entry} remove={remove} flag={flag}/>
                       
                    
               </TableCell>

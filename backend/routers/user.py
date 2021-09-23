@@ -39,6 +39,6 @@ def make_user(user: schemas.User, db: Session = Depends(get_db)):
     return create_user(user=user, db=db)
 
 
-@router.get("/users/me")
+@router.get("/users/me", response_model=schemas.UserGet)
 async def read_users_me(current_user: schemas.User = Depends(get_current_user)):
     return current_user

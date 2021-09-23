@@ -78,7 +78,7 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = De
 
 def create_user(db: Session, user: schemas.User):
     hashed_password = get_password_hash(user.password)
-    db_user = models.UserInDB(name=user.name, password=hashed_password)
+    db_user = models.UserInDB(name=user.name, password=hashed_password, admin=user.admin)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)

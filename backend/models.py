@@ -1,4 +1,5 @@
 from typing import Text
+from sqlalchemy.sql import expression
 
 from sqlalchemy.sql.sqltypes import Float
 from sqlalchemy.types import Text
@@ -38,3 +39,4 @@ class UserInDB(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     password = Column(String)
+    admin = Column(Boolean, default=True)

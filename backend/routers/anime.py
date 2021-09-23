@@ -1,12 +1,16 @@
-from fastapi import Depends, status, HTTPException, APIRouter
+from fastapi import Depends, status, HTTPException, APIRouter, UploadFile, File
 from fastapi.responses import FileResponse
 from sqlalchemy.orm import Session
 import schemas, models
 from dependencies import get_db
 import os
+import shutil
 
 
 router = APIRouter()
+
+dest = r"C:\Users\Timavilla\Documents\myapp\coursework_it\backend\anime_image"
+
 
 @router.post('/anime', status_code=status.HTTP_201_CREATED)
 def create(request: schemas.Anime, db : Session = Depends(get_db)):
@@ -47,3 +51,11 @@ def update(id, request: schemas.Anime, db : Session = Depends(get_db)):
     anime.update(request.dict(), synchronize_session=False)
     db.commit()
     return {'updated'}
+
+@router.post('/anime/{id}/image')
+def upload_image( id, file: UploadFile = File(...)):
+    with open(f"{id}.jpg", "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    full_dest = os.path.join(dest, f"{id}.jpg")
+    shutil.move(buffer.name, full_dest)
+    return {"filename": f"{id}.jpg"}

@@ -6,14 +6,21 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 
 
+
 const WatchListPage = () => {
     
     const [token] = useContext(UserContext);
+    
     const [watchlist, setWatchList] = useState([])
+    const [flag, setFlag] = useState(false)
     
     useEffect(() => {
         fetchWatchList()
-      }, [watchlist])
+      }, [flag])
+
+    const flagSwap = () => {
+      setFlag(!flag)
+    } 
 
 
 
@@ -33,7 +40,7 @@ const WatchListPage = () => {
     return (
       <Box mt="2rem">
         <Container fixed>
-            <WatchList entries={watchlist} remove={removeWatchList}/>
+            <WatchList entries={watchlist} remove={removeWatchList} flag={flagSwap}/>
         </Container> 
       </Box>
     )

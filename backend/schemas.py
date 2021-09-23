@@ -1,6 +1,8 @@
 from pydantic import BaseModel
 from typing import Optional
 
+from sqlalchemy.sql.expression import false
+
 class Anime(BaseModel):
     title_en: str
     title_ru: str
@@ -47,6 +49,13 @@ class WatchListCreate(BaseModel):
 class User(BaseModel):
     name: str
     password: str
+    admin: Optional[bool] = False
+    class Config:
+        orm_mode = True
+
+class UserGet(BaseModel):
+    name: str
+    admin: Optional[bool] = False
     class Config:
         orm_mode = True
 
